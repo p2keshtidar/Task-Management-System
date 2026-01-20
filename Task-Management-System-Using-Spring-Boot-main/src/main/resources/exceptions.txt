@@ -1,0 +1,80 @@
+NoHandlerFoundException vs NoResourceFoundException
+
+In Spring, NoHandlerFoundException and NoResourceFoundException 
+are two different exceptions that serve distinct purposes, 
+and understanding their differences is important for 
+correctly handling errors in your application.
+
+1. NoHandlerFoundException
+
+Context: 
+
+This exception is thrown when a request is made to a URL 
+that does not have a corresponding handler method in your application 
+(i.e., there is no controller method mapped to the requested URL).
+
+Use Case: 
+
+It typically indicates that the requested resource (URL) 
+does not have a defined route in your Spring MVC application. 
+
+For example, 
+if a client makes a GET request to /api/nonexistent, 
+and there is no controller method that handles this path, 
+a NoHandlerFoundException will be thrown.
+
+Response Handling: 
+
+You can catch this exception and provide a custom response, 
+such as a JSON error message indicating that the endpoint does not exist.
+
+2. NoResourceFoundException
+
+Context: 
+
+This exception is not a standard Spring exception 
+but is often used in custom implementations or in specific libraries. 
+It generally indicates that a resource (like a file, image, or other asset) 
+that was expected to be found on the server is not available.
+
+Use Case: 
+
+It may be used in scenarios where you are trying to access a physical resource 
+(like a static file or database entity) 
+and that resource is not present. 
+
+For example, 
+if you are trying to fetch a file from the filesystem and it does not exist, 
+you might throw a NoResourceFoundException.
+
+Response Handling: 
+
+Similar to NoHandlerFoundException, 
+you can catch this exception and return a custom error message or status code.
+
+Choosing Between Them
+
+If you are dealing with missing endpoints (URLs) in your web application, 
+you should use NoHandlerFoundException. 
+This is the appropriate exception to indicate 
+that the requested path does not correspond to any handler.
+
+If you are dealing with missing physical resources 
+(like files or database records), 
+then you might consider using a custom NoResourceFoundException 
+or a similar approach.
+
+Conclusion
+
+If your goal is to handle cases where a requested URL 
+does not map to a handler in your Spring MVC application, 
+you should go for NoHandlerFoundException.
+
+If you need to handle missing resources 
+that are not directly related to URL mappings (like files or other assets), 
+then a NoResourceFoundException (or your own custom exception) 
+would be appropriate.
+
+In summary, 
+choose the exception based on the context of what you are trying to handle: 
+URL mapping vs. resource availability.

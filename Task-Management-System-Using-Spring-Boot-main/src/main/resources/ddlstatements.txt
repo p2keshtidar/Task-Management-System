@@ -1,0 +1,12 @@
+CREATE TABLE `tasks` (
+  `task_id` varchar(36) NOT NULL,
+  `task_created_at` timestamp NOT NULL,
+  `task_description` varchar(255) NOT NULL,
+  `task_due_date` date NOT NULL,
+  `task_status` enum('COMPLETED','IN_PROGRESS','PENDING') NOT NULL,
+  `task_title` varchar(60) NOT NULL,
+  `task_updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`task_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+// created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

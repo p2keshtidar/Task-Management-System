@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  app:
+    image: task-management-application:latest-v0.1
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8090:8090"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/taskmanagementsystem?createDatabaseIfNotExist=true&useSSL=false&useUnicode=yes&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: iamPouria
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: "true"
+    networks:
+      - mynetwork
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: taskmanagementsystem
+      MYSQL_ROOT_PASSWORD: iamPouria
+    ports:
+      - "3307:3306"
+    networks:
+      - mynetwork
+    command: --default-time-zone='+05:30'
+    healthcheck:
+      test: [ "CMD-SHELL", "mysqladmin ping -h localhost -u root --password=iamPouria || exit 1" ]
+      interval: 10s
+      retries: 10
+      start_period: 60s
+      timeout: 10s
+
+networks:
+  mynetwork:
+    driver: bridge

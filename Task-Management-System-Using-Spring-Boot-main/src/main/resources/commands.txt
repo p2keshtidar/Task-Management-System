@@ -1,0 +1,19 @@
+Profiles Commands :- PROD(MySQL) & DEV(H2 In-Memory DB, Embedded Persistence)
+
+1. mvn spring-boot:run -Dspring-boot.run.arguments="--spring.profiles.active=dev"
+2. mvn spring-boot:run -Dspring-boot.run.arguments="--spring.profiles.active=prod"
+
+3. mvn spring-boot:run -Dspring-boot.run.profiles=dev
+4. mvn spring-boot:run -Dspring-boot.run.profiles=prod
+
+docker-compose up --build
+
+docker-compose down
+
+docker exec -it <taskmanagement-db-1> <your-db-container-id> /bin/bash
+
+mysql -u root -p : This will ask for root Password on the next line
+
+Enter your Password and connect to MySQL in Docker
+
+Default Profile is PROD Environment.
